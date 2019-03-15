@@ -42,7 +42,7 @@ module OmniAuth
       def build_access_token
         verifier = request.params['code']
 
-        params = { redirect_uri: callback_url, client_id: options.client_id, client_secret: CGI.escape(options.client_secret), scope: options.scope }
+        params = { redirect_uri: callback_url, client_id: options.client_id, scope: options.scope }
         client.auth_code.get_token(verifier, params.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
       end
 
