@@ -39,13 +39,6 @@ module OmniAuth
         options['redirect_uri'] || full_host + script_name + callback_path
       end
 
-      def build_access_token
-        verifier = request.params['code']
-
-        params = { redirect_uri: callback_url, client_id: options.client_id, scope: options.scope }
-        client.auth_code.get_token(verifier, params.merge(token_params.to_hash(symbolize_keys: true)), deep_symbolize(options.auth_token_params))
-      end
-
       def raw_info
         @raw_info ||= access_token.get('/api/v2.0/me').parsed
       end
